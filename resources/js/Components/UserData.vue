@@ -1,0 +1,184 @@
+<script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+
+const form = useForm({
+    name: '',
+    surname: '',
+    email: '',
+    job: '',
+    address: '',
+    phone: '',
+    city: '',
+    zip: '',
+    province: '',
+    country: '',
+    web: ''
+});
+
+const submit = () => {
+/*    form.post(route('register'), {
+        onFinish: () => form.reset('password', 'password_confirmation'),
+    });
+
+*/
+};
+</script>
+
+<template>
+
+    
+
+    <form @submit.prevent="submit">
+        <div class="grid grid-cols-2 bordenegro">
+            <div class="borde">
+                <InputLabel for="name" value="Nombre" />
+
+                <TextInput
+                    id="name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.name"
+                    required
+                    autofocus
+                    autocomplete="nombre"
+                />
+
+                <InputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div>
+                <InputLabel for="surname" value="Apellidos" />
+
+                <TextInput
+                    id="surname"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.surname"
+                    required
+                    autocomplete="apellidos"
+                />
+
+                <InputError class="mt-2" :message="form.errors.surname" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="email" value="Email" />
+
+                <TextInput
+                    id="email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    v-model="form.email"
+                    required
+                    autocomplete="username"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="phone" value="Teléfono" />
+
+                <TextInput
+                    id="phone"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    v-model="form.phone"
+                    required
+                    autocomplete="new-telefono"
+                />
+
+                <InputError class="mt-2" :message="form.errors.phone" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="city" value="Localidad" />
+
+                <TextInput
+                    id="city"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.city"
+                    required
+                    autocomplete="localidad"
+                />
+
+                <InputError class="mt-2" :message="form.errors.city" />
+            </div>
+
+
+            <div class="mt-4">
+                <InputLabel for="zip" value="Código Postal" />
+
+                <TextInput
+                    id="zip"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.zip"
+                    required
+                    autocomplete="zip"
+                />
+
+                <InputError class="mt-2" :message="form.errors.zip" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="province" value="Provincia" />
+
+                <TextInput
+                    id="province"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.province"
+                    required
+                    autocomplete="province"
+                />
+
+                <InputError class="mt-2" :message="form.errors.province" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="country" value="País" />
+
+                <TextInput
+                    id="country"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.country"
+                    required
+                    autocomplete="country"
+                />
+
+                <InputError class="mt-2" :message="form.errors.country" />
+            </div>
+
+
+
+            <div class="flex items-center justify-end mt-4">
+
+
+                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Guardar
+                </PrimaryButton>
+            </div>
+        </div>
+    </form>
+    
+</template>
+
+<style>
+
+.borde {
+    border: 1px solid red;
+}
+
+.bordenegro {
+    border: 1px solid black;
+}
+
+</style>
