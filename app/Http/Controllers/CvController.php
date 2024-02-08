@@ -4,22 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Redirect;
 
 class CvController extends Controller
 {
     //
 
+    public function updatePersonalData(Request $request) {
+        auth()->user()->fill($request->all());
+
+        $request->user()->save();
+
+        return Redirect::route('dashboard');
+    }
+
 
     public function createCv() {
-/*
-        $posts = Post::all();
+
+        $user = auth()->user();
 
         //return view('posts.cv1', compact('posts'));
 
 
-        $pdf = Pdf::loadView('posts.cv1');
+        $pdf = Pdf::loadView('cv.cv1', compact('user'));
 
-        return $pdf->stream('posts_cv1.pdf');   
-*/
+        return $pdf->stream('cv1.pdf');   
+
     }    
 }

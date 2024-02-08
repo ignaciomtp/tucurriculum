@@ -10,10 +10,10 @@
 
 <style type="text/css">
 .nametitle {
-  font-size: 40px;
+  font-size: 35px;
   color: #AA9739;
   font-family: 'Maven';
-  line-height: 40px;
+  line-height: 35px;
 }
 
 .jobtitle {
@@ -43,6 +43,22 @@
   width: 40%;
 }
 
+.block-20 {
+  width: 20%;
+}
+
+.block-30 {
+  width: 30%;
+}
+
+.clrl {
+  clear: left;
+}
+
+.clrr {
+  clear: right;
+}
+
 .f-right {
   float: right;
 }
@@ -67,19 +83,19 @@
   <body>
     <div class="col-container">
 
-      <div class="h-block f-right ">
+      <div class="block-20 f-right clrr">
         <div class="address ">
-          9898 West Avenue, <br>
-          Los Angeles, CA 90034 <br>
-          wbjones@emailaddress.com <br>
-          1999-555-1234
+          {{ $user->address }}, <br>
+          {{ $user->zip }} {{ $user->city }} <br>
+          {{ $user->email }} <br>
+          {{ $user->phone }}
         </div>
       </div>
 
 
-      <div class="h-block ">
+      <div class="clr ">
         <div class="nametitle " >
-          Jennifer Smith
+          {{ $user->name }} {{ $user->surname }}
         </div>
         <div class="jobtitle">
           Food Service Manager
@@ -88,8 +104,8 @@
 
     </div>
 
-    <div class="mt-5">
-      Food service manager with 15 years of experience seeking ,a position in ,a high-volume fast food restaurant. Qualifications include strong leadership skills, the ability to thrive in hectic environments and Foodservice Management Professional certification.
+    <div class="mv-4">
+     {{ $user->job }}
     </div>
 
     <div class="section">

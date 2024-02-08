@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import UserData from '@/Components/UserData.vue';
-import TopBar from '@/Components/TopBar.vue';
+
 
 defineProps({
     canLogin: {
@@ -52,9 +51,6 @@ defineProps({
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <TopBar />
-            
-            <UserData />
 
 
             <div class="mt-16">
