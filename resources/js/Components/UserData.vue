@@ -17,6 +17,7 @@ const form = useForm({
     zip: '',
     province: '',
     country: '',
+    photo: '',
     web: ''
 });
 
@@ -31,11 +32,9 @@ const submit = () => {
 
 <template>
 
-    
-
     <form @submit.prevent="submit">
         <div class="grid grid-cols-2 bordenegro">
-            <div class="borde">
+            <div class="p-2 m-2">
                 <InputLabel for="name" value="Nombre" />
 
                 <TextInput
@@ -51,7 +50,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
-            <div>
+            <div class="p-2 m-2">
                 <InputLabel for="surname" value="Apellidos" />
 
                 <TextInput
@@ -66,7 +65,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.surname" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
@@ -81,7 +80,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="phone" value="Teléfono" />
 
                 <TextInput
@@ -96,7 +95,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="city" value="Localidad" />
 
                 <TextInput
@@ -112,7 +111,7 @@ const submit = () => {
             </div>
 
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="zip" value="Código Postal" />
 
                 <TextInput
@@ -127,7 +126,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.zip" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="province" value="Provincia" />
 
                 <TextInput
@@ -142,7 +141,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.province" />
             </div>
 
-            <div class="mt-4">
+            <div class="p-2 m-2">
                 <InputLabel for="country" value="País" />
 
                 <TextInput
@@ -159,7 +158,7 @@ const submit = () => {
 
 
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end p-2 m-2">
 
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
