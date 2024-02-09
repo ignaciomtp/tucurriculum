@@ -181,7 +181,7 @@ const submit = () => {
                 <InputLabel for="photo" value="Foto" />
 
                 <div v-if="props.user.photo">
-                    <img :src="'images/' + props.user.photo" width="100">
+                    <img :src="'storage/' + props.user.photo" width="100">
                 </div>
 
 

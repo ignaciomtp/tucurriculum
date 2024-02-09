@@ -97,7 +97,7 @@
       </div>
 
       <div class="block-20 ">
-        <img src="{{  asset('images/' . $user->photo) }}" height="100">
+        <img src="{{  asset('storage/' . $user->photo) }}" height="100">
       </div>
 
       <div class="block-40 ">

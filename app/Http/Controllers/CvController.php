@@ -41,13 +41,13 @@ class CvController extends Controller
     public function createCv() {
 
         $user = auth()->user();
-
-        return view('cv.cv1', compact('user'));
-
 /*
+        return view('cv.cv1', compact('user'));
+*/
+
         $pdf = Pdf::loadView('cv.cv1', compact('user'));
 
         return $pdf->stream('cv1.pdf');   
-*/
+
     }    
 }
