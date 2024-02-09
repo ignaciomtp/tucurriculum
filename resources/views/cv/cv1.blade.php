@@ -39,7 +39,7 @@
   justify-content: space-between;
 }
 
-.h-block {
+.block-40 {
   width: 40%;
 }
 
@@ -57,6 +57,10 @@
 
 .clrr {
   clear: right;
+}
+
+.clr {
+  clear: both;
 }
 
 .f-right {
@@ -83,7 +87,7 @@
   <body>
     <div class="col-container">
 
-      <div class="block-20 f-right clrr">
+      <div class="block-30  f-right">
         <div class="address ">
           {{ $user->address }}, <br>
           {{ $user->zip }} {{ $user->city }} <br>
@@ -92,23 +96,28 @@
         </div>
       </div>
 
+      <div class="block-20 ">
+        <img src="{{  asset('images/' . $user->photo) }}" height="100">
+      </div>
 
-      <div class="clr ">
+      <div class="block-40 ">
         <div class="nametitle " >
           {{ $user->name }} {{ $user->surname }}
         </div>
         <div class="jobtitle">
-          Food Service Manager
+          {{ $user->job_title }}
         </div>
       </div>
 
     </div>
 
+    <div class="clr"></div>
+
     <div class="mv-4">
      {{ $user->job }}
     </div>
 
-    <div class="section">
+    <div class="section mt-3 mb-3">
       Profesional Experience
     </div>
 

@@ -18,6 +18,7 @@ const form = useForm({
     surname: props.user.surname || '',
     email: props.user.email || '',
     job: props.user.job || '',
+    job_title: props.user.job_title || '',
     address: props.user.address || '',
     phone: props.user.phone || '',
     city: props.user.city || '',
@@ -29,7 +30,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('personal.data'));
+    form.post(route('personal.data'));
 
 
 };
@@ -37,8 +38,8 @@ const submit = () => {
 
 <template>
 
-    <form @submit.prevent="submit">
-        <div class="grid grid-cols-2 ">
+    <form @submit.prevent="submit" enctype="multipart/form-data">
+        <div class="grid grid-cols-4 ">
             <div class="p-2 m-2">
                 <InputLabel for="name" value="Nombre" />
 
@@ -175,6 +176,47 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.country" />
             </div>
 
+
+            <div class="p-2 m-2 col-start-3 col-span-2">
+                <InputLabel for="photo" value="Foto" />
+
+                <div v-if="props.user.photo">
+                    <img :src="'images/' + props.user.photo" width="100">
+                </div>
+
+
+                <TextInput
+                    id="photo"
+                    type="file"
+                    class="mt-1 block w-full"
+                    
+                    @input="form.photo = $event.target.files[0]"
+                    autocomplete="photo"
+                />
+
+                <InputError class="mt-2" :message="form.errors.photo" />
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 ">
+
+            <div class="p-2 m-2">
+                <InputLabel for="job_title" value="Título" />
+
+                <TextInput
+                    id="job_title"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.job_title"
+                    
+                    autocomplete="job_title"
+                />
+
+                <InputError class="mt-2" :message="form.errors.job_title" />
+            </div>
+
+
             <div class="p-2 m-2">
                 <InputLabel for="job" value="Intro" />
 
@@ -187,7 +229,8 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.job" />
-            </div>
+            </div>    
+
 
             <div class="flex items-center justify-end p-2 m-2">
 
@@ -196,7 +239,13 @@ const submit = () => {
                     Guardar
                 </PrimaryButton>
             </div>
+
+
         </div>
+
+        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+          {{ form.progress.percentage }}%
+        </progress>
     </form>
     
 </template>

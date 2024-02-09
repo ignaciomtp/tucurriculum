@@ -24,6 +24,7 @@ class User extends Authenticatable
         'role',
         'surname',
         'phone',
+        'job_title',
         'job',
         'address',
         'zip',
