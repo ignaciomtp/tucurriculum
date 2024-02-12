@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use App\Jobs\GeneratePdf;
 
 class CvController extends Controller
 {
@@ -41,13 +43,37 @@ class CvController extends Controller
     public function createCv() {
 
         $user = auth()->user();
+
+        GeneratePdf::dispatch($user);
+
+        return Redirect::route('dashboard');
+
 /*
         return view('cv.cv1', compact('user'));
+
+
+
+        $job = new GeneratePdf($user);
+
+        $job->dispatch($user)->onConnection('database');
+
+        //return $job->getPdfFilePath();
+
+        return Redirect::route('dashboard');
 */
 
+/*
         $pdf = Pdf::loadView('cv.cv1', compact('user'));
 
         return $pdf->stream('cv1.pdf');   
+*/
 
+
+/*
+        $content = $pdf->download()->getOriginalContent();
+        Storage::put('public/pdfs/'.$user->name.'.pdf', $content);
+
+        return Redirect::route('dashboard');
+*/
     }    
 }
