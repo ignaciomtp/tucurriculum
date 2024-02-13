@@ -9,26 +9,32 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
 <style type="text/css">
+
+
+body {
+  font-size: 0.9rem;
+}
+
 .nametitle {
-  font-size: 35px;
+  font-size: 30px;
   color: #AA9739;
   font-family: 'Maven';
   line-height: 35px;
 }
 
 .jobtitle {
-  font-size: 25px;
+  font-size: 20px;
   
 }
 
 .address {
-  font-size: 14px;
+  font-size: 0.8rem;
   color: #AA9739;
   
 }
 
 .section {
-  font-size: 20px;
+  font-size: 18px;
   color: #AA9739;
   
   border-bottom: 1px solid #AA9739;
@@ -130,7 +136,7 @@
 
     <div class="clr"></div>
 
-    <div class="mv-4">
+    <div class="">
      {{ $user->job }}
     </div>
 
