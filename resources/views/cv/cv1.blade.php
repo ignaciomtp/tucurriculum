@@ -39,16 +39,33 @@
   justify-content: space-between;
 }
 
+
+.block-60 {
+  width: 60%;
+}
+
+.block-50 {
+  width: 50%;
+}
+
 .block-40 {
   width: 40%;
+}
+
+.block-30 {
+  width: 30%;
 }
 
 .block-20 {
   width: 20%;
 }
 
-.block-30 {
-  width: 30%;
+.block-10 {
+  width: 10%;
+}
+
+.ib {
+  display: inline-block;
 }
 
 .clrl {
@@ -87,7 +104,7 @@
   <body>
     <div class="col-container">
 
-      <div class="block-30  f-right">
+      <div class="block-30 f-right ">
         <div class="address ">
           {{ $user->address }}, <br>
           {{ $user->zip }} {{ $user->city }} <br>
@@ -96,9 +113,11 @@
         </div>
       </div>
 
+      <div class="block-10 ib ">
+        <img src="{{ public_path('storage/' . $user->photo) }}" height="100">
+      </div>
 
-
-      <div class="block-40 ">
+      <div class="block-50 ib pl-2">
         <div class="nametitle " >
           {{ $user->name }} {{ $user->surname }}
         </div>
