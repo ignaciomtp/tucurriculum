@@ -176,8 +176,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.country" />
             </div>
 
-
-            <div class="p-2 m-2 col-start-3 col-span-2">
+            <div class="p-2 m-2 row-span-2">
                 <InputLabel for="photo" value="Foto" />
 
                 <div v-if="props.user.photo">
@@ -197,11 +196,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.photo" />
             </div>
 
-        </div>
-
-        <div class="grid grid-cols-2 ">
-
-            <div class="p-2 m-2">
+            <div class="p-2 m-2 col-span-2 col-start-3">
                 <InputLabel for="job_title" value="Título" />
 
                 <TextInput
@@ -216,8 +211,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.job_title" />
             </div>
 
-
-            <div class="p-2 m-2">
+            <div class="p-2 m-2 col-start-3 col-span-2">
                 <InputLabel for="job" value="Intro" />
 
                 <TextTextarea
@@ -231,15 +225,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.job" />
             </div>    
 
-
-            <div class="flex items-center justify-end p-2 m-2">
+            <div class="flex items-center justify-start pt-3 m-2 row-start-4">
 
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Guardar
                 </PrimaryButton>
             </div>
-
 
         </div>
 

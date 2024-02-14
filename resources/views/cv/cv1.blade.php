@@ -119,11 +119,11 @@ body {
         </div>
       </div>
 
-      <div class="block-10 ib ">
+      <div class="block-10 ib mr-4">
         <img src="{{ public_path('storage/' . $user->photo) }}" height="100">
       </div>
 
-      <div class="block-50 ib pl-2">
+      <div class="block-50 ib ml-2">
         <div class="nametitle " >
           {{ $user->name }} {{ $user->surname }}
         </div>
@@ -140,7 +140,7 @@ body {
      {{ $user->job }}
     </div>
 
-    <div class="section mt-3 mb-3">
+    <div class="section mt-3 mb-2">
       Profesional Experience
     </div>
 
