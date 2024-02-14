@@ -9,6 +9,16 @@ class Resume extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'user_id',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

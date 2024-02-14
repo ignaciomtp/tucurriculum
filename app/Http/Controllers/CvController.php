@@ -7,6 +7,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Jobs\GeneratePdf;
+use Inertia\Inertia;
+use App\Models\Resume;
 
 class CvController extends Controller
 {
@@ -40,7 +42,7 @@ class CvController extends Controller
     }
 
 
-    public function createCv() {
+    public function createPdfCv() {
 
         $user = auth()->user();
 /*
@@ -66,4 +68,36 @@ class CvController extends Controller
         return Redirect::route('dashboard');
 */
     }    
+
+
+    public function viewCvs() {
+
+        $cvs = auth()->user()->resumes()->get();
+
+
+
+        return Inertia::render('ViewCVs', ['cvs' => $cvs->all()]);
+
+    }
+
+    public function createNewCv() {
+        
+        return Inertia::render('CVForm');
+    }
+
+    public function saveNewCv(Request $request) {
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        $cv = new Resume;
+
+        $cv->title = $request->title;
+        $cv->user_id = auth()->user()->id;
+        $cv->save();
+
+        return Redirect::route('miscvs');
+    }
+
+
 }
