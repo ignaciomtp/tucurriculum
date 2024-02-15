@@ -7,16 +7,16 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-    title: String
+    cv: Object,
 });
 
 const form = useForm({
-    title: props.title || '',
-
+    title: props.cv.title || '',
+    cv_id: props.cv.id || 0,
 });
 
 const submit = () => {
-    form.post(route('savenewcv'));
+    form.put(route('updatecv'));
 };
 
 </script>
@@ -36,11 +36,11 @@ const submit = () => {
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">                  
 
                    <div class="p-4 ">
-                       <h1 class="text-2xl">Nuevo Currículum</h1>
+                       <h1 class="text-2xl">Actualizar Currículum</h1>
 
                        <div class="my-2">
                           <form @submit.prevent="submit">
-                              <div class="p-2 m-2">
+                            <div class="p-2 m-2">
                                 <InputLabel for="title" value="Título" />
 
                                 <TextInput
@@ -55,6 +55,22 @@ const submit = () => {
 
                                 <InputError class="mt-2" :message="form.errors.title" />
                             </div>
+
+                            <div class="p-2 m-2">
+                                <InputLabel for="cv_id" value="Id" />
+
+                                <input 
+                                    id="cv_id"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    v-model="form.cv_id"
+                                    readonly 
+                                    
+                                />
+
+                                <InputError class="mt-2" :message="form.errors.cv_id" />
+                            </div>
+
 
                             <div class="flex items-center justify-start pt-3 m-2 row-start-4">
                                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

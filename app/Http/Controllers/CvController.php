@@ -74,8 +74,6 @@ class CvController extends Controller
 
         $cvs = auth()->user()->resumes()->get();
 
-
-
         return Inertia::render('ViewCVs', ['cvs' => $cvs->all()]);
 
     }
@@ -97,6 +95,27 @@ class CvController extends Controller
         $cv->save();
 
         return Redirect::route('miscvs');
+    }
+
+    public function editCv($id) {
+        $cv = Resume::find($id);
+
+        return Inertia::render('CVFormEdit', ['cv' => $cv]);
+
+    }
+
+    public function updateCv(Request $request) {
+        $cv = Resume::findOrFail($request->cv_id);
+
+        $cv->title = $request->title;
+        $cv->save();
+/*
+        echo "<pre>";
+        print_r($cv);
+        echo "<pre>";
+        die();
+*/
+        return Inertia::render('CVFormEdit', ['cv' => $cv]);
     }
 
 
