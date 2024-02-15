@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Jobs\GeneratePdf;
 use Inertia\Inertia;
 use App\Models\Resume;
+use App\Models\Experience;
 
 class CvController extends Controller
 {
@@ -55,7 +56,12 @@ class CvController extends Controller
 */
 
 /**/
-        $pdf = Pdf::loadView('cv.cv1', compact('user'));
+
+        $cv = Resume::find(1);
+
+        $experiences = $cv->experiences()->get()->all();
+
+        $pdf = Pdf::loadView('cv.cv1', compact('user', 'experiences'));
 
         return $pdf->stream('cv1.pdf');   
 
@@ -100,7 +106,24 @@ class CvController extends Controller
     public function editCv($id) {
         $cv = Resume::find($id);
 
-        return Inertia::render('CVFormEdit', ['cv' => $cv]);
+        $experiences = $cv->experiences()->get()->all();
+
+        if(!$experiences) {
+
+            $var = new \stdClass();
+            $var->id = 0;
+            $var->resume_id = $id;
+            $var->title = '';
+            $var->company_name = '';
+            $var->company_city = '';
+            $var->date_start = '';
+            $var->date_finish = '';
+            $var->job_description = '';
+
+            $experiences = [$var];
+        }
+
+        return Inertia::render('CVFormEdit', ['cv' => $cv, 'experiences' => $experiences]);
 
     }
 
@@ -115,7 +138,34 @@ class CvController extends Controller
         echo "<pre>";
         die();
 */
-        return Inertia::render('CVFormEdit', ['cv' => $cv]);
+        //return Inertia::render('CVFormEdit', ['cv' => $cv]);
+
+        return Redirect::route('editcv', ['id' => $cv->id]);
+    }
+
+    public function addExperience(Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'company_name' => 'required',
+            'company_city' => 'required',
+            'date_start' => 'required',
+            'date_finish' => 'required',
+            'job_description' => 'required'
+        ]);
+
+        $exp = new Experience;
+        $exp->title = $request->title;
+        $exp->company_name = $request->company_name;
+        $exp->company_city = $request->company_city;
+        $exp->date_start = $request->date_start;
+        $exp->date_finish = $request->date_finish;
+        $exp->job_description = $request->job_description;
+        $exp->resume_id = $request->resume_id;
+
+        $exp->save();
+
+        return Redirect::route('editcv', ['id' => $exp->resume_id]);
+
     }
 
 

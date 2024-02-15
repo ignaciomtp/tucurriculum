@@ -144,6 +144,19 @@ body {
       Profesional Experience
     </div>
 
+    
+      @foreach($experiences as $exp)
+      <div class="sectioncontent">
+        <span class="font-weight-bold">{{ $exp->title }}</span> en {{ $exp->company_name }}, {{ $exp->company_city }}
+        <p>
+          {{ $exp->job_description }}
+        </p>
+      </div>
+      @endforeach
+    
+
+
+
     <div class="sectioncontent">
       Assistant Manager, Burger World, Orlando, FL – January 2010 – present
 
