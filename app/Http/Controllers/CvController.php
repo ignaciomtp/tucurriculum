@@ -168,5 +168,30 @@ class CvController extends Controller
 
     }
 
+    public function updateExperience(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'title' => 'required',
+            'company_name' => 'required',
+            'company_city' => 'required',
+            'date_start' => 'required',
+            'date_finish' => 'required',
+            'job_description' => 'required'
+        ]);
+
+        $exp = Experience::findOrFail($request->id);
+        $exp->title = $request->title;
+        $exp->company_name = $request->company_name;
+        $exp->company_city = $request->company_city;
+        $exp->date_start = $request->date_start;
+        $exp->date_finish = $request->date_finish;
+        $exp->job_description = $request->job_description;
+        $exp->resume_id = $request->resume_id;
+
+        $exp->save();
+
+        return Redirect::route('editcv', ['id' => $exp->resume_id]);
+    }
+
 
 }

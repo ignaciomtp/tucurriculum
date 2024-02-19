@@ -24,6 +24,7 @@ const submit = () => {
 
 const addExperience = () => {
     const exp = {
+        id: 0,
         resume_id: props.cv.id,
         title: '',
         company_name: '',
@@ -115,7 +116,7 @@ const addExperience = () => {
                        <div class="mx-2 my-5">
                            
                            <div class="text-right">
-                               <a :href="route('view.cv')" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</a>
+                               <button type="button" @click="addExperience()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
                            </div>
                            <h2>Experiencia</h2>
                            <hr>
