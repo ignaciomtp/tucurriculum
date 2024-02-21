@@ -39,6 +39,8 @@ const addExperience = () => {
 
 //addExperience();
 
+console.log(props.experiences);
+
 </script>
 
 <template>
@@ -115,9 +117,7 @@ const addExperience = () => {
 
                        <div class="mx-2 my-5">
                            
-                           <div class="text-right">
-                               <button type="button" @click="addExperience()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
-                           </div>
+                           
                            <h2>Experiencia</h2>
                            <hr>
 
@@ -125,6 +125,10 @@ const addExperience = () => {
                                <ExperienceElement 
                                     :experience="item"
                                />
+                           </div>
+
+                           <div class="text-right mb-4">
+                               <button type="button" @click="addExperience()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
                            </div>
                        </div>
                        

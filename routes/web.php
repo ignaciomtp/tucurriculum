@@ -41,8 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/savenewcv', [CvController::class, 'saveNewCv'])->name('savenewcv');
     Route::get('/editcv/{id}', [CvController::class, 'editCv'])->name('editcv');
     Route::put('/editcv/', [CvController::class, 'updateCv'])->name('updatecv');
-    Route::post('/addexperience/', [CvController::class, 'addExperience'])->name('addexperience');
-    Route::post('/updateexperience/', [CvController::class, 'updateExperience'])->name('updateexperience');
+    Route::post('/editcv/addexperience/', [CvController::class, 'addExperience'])->name('addexperience');
+    Route::post('/editcv/updateexperience/', [CvController::class, 'updateExperience'])->name('updateexperience');
 });
 
 require __DIR__.'/auth.php';

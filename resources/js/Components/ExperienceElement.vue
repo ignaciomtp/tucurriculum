@@ -24,9 +24,34 @@ const form = useForm({
 });
 
 const submit = () => {
-	let formRoute = props.experience.id == 0 ? 'addexperience' : 'updateexperience';
+	const formRoute = props.experience.id == 0 ? 'addexperience' : 'updateexperience';
 
-    form.post(route(formRoute));
+    //form.post(route(formRoute));
+
+    let exp = {
+    	title: form.title,
+    	resume_id: form.resume_id,
+    	company_name: form.company_name,
+    	company_city: form.company_city,
+    	date_start: form.date_start,
+    	date_finish: form.date_finish,
+    	job_description: form.job_description,
+    };
+
+    if(props.experience.id > 0) exp.id = form.id;
+
+    axios.post(formRoute, exp)
+	.then(function (response) {
+		console.log(response);
+
+		props.experience.id = response.data.id;
+
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+
+    
 };
 
 </script>
@@ -181,10 +206,7 @@ const submit = () => {
                         </PrimaryButton>
 
                         <div v-if="props.experience.id > 0" class="flex">
-                        	<SecondaryButton  class="ms-4" 
-                        					type="submit"
-				                        	:class="{ 'opacity-25': form.processing }" 
-				                        	:disabled="form.processing">
+                        	<SecondaryButton  class="ms-4" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 	                            Actualizar
 	                        </SecondaryButton>
 
