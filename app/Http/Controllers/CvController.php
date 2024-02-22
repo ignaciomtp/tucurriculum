@@ -144,15 +144,15 @@ class CvController extends Controller
     }
 
     public function addExperience(Request $request) {
-/*        $request->validate([
+        $request->validate([
             'title' => 'required',
             'company_name' => 'required',
             'company_city' => 'required',
             'date_start' => 'required',
             'date_finish' => 'required',
             'job_description' => 'required'
-        ]);
-*/
+        ], );
+
         $exp = new Experience;
         $exp->title = $request->title;
         $exp->company_name = $request->company_name;
@@ -197,6 +197,12 @@ class CvController extends Controller
         //return Redirect::route('editcv', ['id' => $exp->resume_id]);
 
         return $exp;
+    }
+
+    public function deleteExperience($id) {
+        Experience::destroy($id);
+
+        return $id;
     }
 
 

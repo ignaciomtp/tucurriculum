@@ -37,9 +37,12 @@ const addExperience = () => {
     props.experiences.push(exp);
 }
 
-//addExperience();
 
-console.log(props.experiences);
+const deleteExperience = (id) => {
+    let idx = props.experiences.findIndex(elem => elem.id == id);
+
+    if(idx > -1) props.experiences.splice(idx, 1);
+}
 
 </script>
 
@@ -124,6 +127,7 @@ console.log(props.experiences);
                            <div class="my-3 py-2 bg-gray-200" v-for="(item, index) in experiences" :key="index + 1">
                                <ExperienceElement 
                                     :experience="item"
+                                    @experience-deleted="deleteExperience"
                                />
                            </div>
 

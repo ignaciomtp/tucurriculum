@@ -12,6 +12,8 @@ const props = defineProps({
     experience: Object,
 });
 
+const emit = defineEmits(['experience-deleted']);
+
 const form = useForm({
 	id: props.experience.id || 0,
     resume_id: props.experience.resume_id || 0,
@@ -45,14 +47,30 @@ const submit = () => {
 		console.log(response);
 
 		props.experience.id = response.data.id;
+		form.id = response.data.id;
 
 	})
 	.catch(function (error) {
 		console.log(error);
 	});
-
     
 };
+
+const deleteExp = () => {
+	console.log(props.experience.id);
+
+	axios.post('deleteexperience/' + props.experience.id, {
+	  _method: 'DELETE'
+	})
+	.then( response => {
+	   console.log(response);
+
+	   emit('experience-deleted', response.data);
+	})
+	.catch( error => {
+	   console.log(error);
+	})
+}
 
 </script>
 
@@ -214,7 +232,7 @@ const submit = () => {
 	                        	<button 
 							        type="button"
 							        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-							        @click="console.log('quitar')"
+							        @click="deleteExp"
 							    >
 							        Quitar
 							    </button>
