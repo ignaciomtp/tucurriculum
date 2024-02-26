@@ -6,17 +6,25 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ChevronDown from '@/Components/ChevronDown.vue';
 import ChevronUp from '@/Components/ChevronUp.vue';
+import CvSectionAccordion from '@/Components/CvSectionAccordion.vue';
 import ExperienceElement from '@/Components/ExperienceElement.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 let props = defineProps({
     cv: Object,
     experiences: Array,
-
+    formations: Array,
 });
 
-const experienceVisible = ref(true);
+
+const sectionsVisible = reactive({
+    experience: true,
+    formation: false,
+    complementary_formation: false,
+    skills: false,
+    languages: false,
+});
 
 const form = useForm({
     title: props.cv.title || '',
@@ -27,32 +35,34 @@ const submit = () => {
     form.put(route('updatecv'));
 };
 
-const toggleExperienceVisible = () => {
-    experienceVisible.value = !experienceVisible.value;
+const toggleSectionVisible = (section) => {
+    sectionsVisible[section] = !sectionsVisible[section];
 }
 
-
-
-const addExperience = () => {
-    const exp = {
-        id: 0,
-        resume_id: props.cv.id,
-        title: '',
-        company_name: '',
-        company_city: '',
-        date_start: '',
-        date_finish: '',
-        job_description: '',
-    };
+const addExperience = (exp) => {
+    exp['resume_id'] = props.cv.id;
 
     props.experiences.push(exp);
 }
-
 
 const deleteExperience = (id) => {
     let idx = props.experiences.findIndex(elem => elem.id == id);
 
     if(idx > -1) props.experiences.splice(idx, 1);
+}
+
+const addElement = (data) => {
+    console.log('Elem: ', data.elem);
+    console.log('Section: ', data.section);
+    data.elem['resume_id'] = props.cv.id;
+
+    props[data.section + 's'].push(data.elem);
+}
+
+const deleteElement = (data) => {
+    let idx = props[data.section + 's'].findIndex(elem => elem.id == data.id);
+
+    if(idx > -1) props[data.section + 's'].splice(idx, 1);
 }
 
 </script>
@@ -131,38 +141,23 @@ const deleteExperience = (id) => {
                           </form>
                        </div>
 
-                       <div class="mx-2 my-5 rounded-md p-2 border border-gray-400 bg-gray-100">
+                       <CvSectionAccordion
+                            title="experience"
+                            :items="props.experiences"
+                            :visible="sectionsVisible.experience"
+                            @section-visibility="toggleSectionVisible"
+                            @experience-element-added="addElement"
+                            @experience-element-removed="deleteElement"
+                       ></CvSectionAccordion>
 
-                            <div class="divide-b divide-dashed flex flex-row ">
-                                <div class="basis-1/4">
-                                    <h2>Experiencia</h2>
-                                </div>
-
-                                <div class="basis-3/4">
-                                    <button type="button" @click="toggleExperienceVisible" class="text-right w-full">
-                                        <ChevronUp v-if="experienceVisible"></ChevronUp>
-                                        <ChevronDown v-if="!experienceVisible"></ChevronDown>
-                                    </button>
-                                </div>
-                            </div>
-                           
-                           
-
-                           <div v-if="experienceVisible">
-                               <div class="my-3 py-2 bg-gray-200" v-for="(item, index) in experiences" :key="index + 1">
-                                   <ExperienceElement 
-                                        :experience="item"
-                                        @experience-deleted="deleteExperience"
-                                   />
-                               </div>
-
-                               <div class="text-right mb-4">
-                                   <button type="button" @click="addExperience()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
-                               </div>
-                           </div>
-
-                           
-                       </div>
+                       <CvSectionAccordion
+                            title="formation"
+                            :items="props.formations"
+                            :visible="sectionsVisible.formation"
+                            @section-visibility="toggleSectionVisible"
+                            @formation-element-added="addElement"
+                            @formation-element-removed="deleteElement"
+                       ></CvSectionAccordion>
                        
                    </div>
 

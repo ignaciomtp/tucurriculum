@@ -10,6 +10,7 @@ use App\Jobs\GeneratePdf;
 use Inertia\Inertia;
 use App\Models\Resume;
 use App\Models\Experience;
+use App\Models\Formation;
 
 class CvController extends Controller
 {
@@ -123,7 +124,23 @@ class CvController extends Controller
             $experiences = [$var];
         }
 
-        return Inertia::render('CVFormEdit', ['cv' => $cv, 'experiences' => $experiences]);
+        $formations = $cv->formations()->get()->all();
+
+        if(!$formations) {
+
+            $var = new \stdClass();
+            $var->id = 0;
+            $var->resume_id = $id;
+            $var->title = '';
+            $var->institution = '';
+            $var->institution_city = '';
+            $var->date_start = '';
+            $var->date_finish = '';
+
+            $formations = [$var];
+        }
+
+        return Inertia::render('CVFormEdit', ['cv' => $cv, 'experiences' => $experiences, 'formations' => $formations]);
 
     }
 
@@ -205,5 +222,42 @@ class CvController extends Controller
         return $id;
     }
 
+    public function addFormation(Request $request) {
+
+        $formation = new Formation;
+
+        $formation->title = $request->title;
+        $formation->institution = $request->institution;
+        $formation->institution_city = $request->institution_city;
+        $formation->date_start = $request->date_start;
+        $formation->date_finish = $request->date_finish;
+        $formation->resume_id = $request->resume_id;
+
+        $formation->save();
+
+        return $formation;
+    }
+
+    public function updateFormation(Request $request) {
+
+        $formation = Formation::findOrFail($request->id);
+
+        $formation->title = $request->title;
+        $formation->institution = $request->institution;
+        $formation->institution_city = $request->institution_city;
+        $formation->date_start = $request->date_start;
+        $formation->date_finish = $request->date_finish;
+        $formation->resume_id = $request->resume_id;
+
+        $formation->save();
+
+        return $formation;
+    }
+
+    public function deleteFormation($id) {
+        Formation::destroy($id);
+
+        return $id;
+    }
 
 }

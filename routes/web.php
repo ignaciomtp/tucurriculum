@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/editcv/addexperience/', [CvController::class, 'addExperience'])->name('addexperience');
     Route::post('/editcv/updateexperience/', [CvController::class, 'updateExperience'])->name('updateexperience');
     Route::delete('/editcv/deleteexperience/{id}', [CvController::class, 'deleteExperience'])->name('deleteexperience');
+
+    Route::post('/editcv/addformation/', [CvController::class, 'addFormation'])->name('addformation');
+    Route::post('/editcv/updateformation/', [CvController::class, 'updateFormation'])->name('updateformation');
+    Route::delete('/editcv/deleteformation/{id}', [CvController::class, 'deleteFormation'])->name('deleteformation');
 });
 
 require __DIR__.'/auth.php';
