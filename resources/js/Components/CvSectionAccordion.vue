@@ -3,6 +3,7 @@ import ChevronDown from '@/Components/ChevronDown.vue';
 import ChevronUp from '@/Components/ChevronUp.vue';
 import ExperienceElement from '@/Components/ExperienceElement.vue';
 import FormationElement from '@/Components/FormationElement.vue';
+import ComplementaryFormationElement from '@/Components/ComplementaryFormationElement.vue';
 import { ref, onMounted } from "vue";
 
 let props = defineProps({
@@ -35,6 +36,8 @@ const toggleVisibility = () => {
 }
 
 const slugify = (str) => {
+    if(str == 'complementary_formation') return str;
+
   return String(str)
     .normalize('NFKD') // split accented characters into their base characters and diacritical marks
     .replace(/[\u0300-\u036f]/g, '') // remove all the accents, which happen to be all in the \u03xx UNICODE block.
@@ -100,9 +103,9 @@ const addElement = () => {
                 type: 'complementaria',
                 institution: '',
                 institution_city: '',
-                hours: '',
-                date_start: '',
-                date_finish: '',
+                hours: 0,
+                year: 0,
+                
             };
             break;
 
@@ -194,6 +197,13 @@ onMounted(() => {
                     <FormationElement 
                         :formation="item"
                         @formation-deleted="deleteElement"
+                    />
+                </div>
+
+                <div v-if="title == 'complementary_formation'">
+                    <ComplementaryFormationElement 
+                        :formation="item"
+                        @complementary_formation-deleted="deleteElement"
                     />
                 </div>
 

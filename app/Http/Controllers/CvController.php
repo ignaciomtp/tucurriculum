@@ -124,7 +124,7 @@ class CvController extends Controller
             $experiences = [$var];
         }
 
-        $formations = $cv->formations()->get()->all();
+        $formations = $cv->formations()->where('type', 'académica')->get()->all();
 
         if(!$formations) {
 
@@ -140,7 +140,29 @@ class CvController extends Controller
             $formations = [$var];
         }
 
-        return Inertia::render('CVFormEdit', ['cv' => $cv, 'experiences' => $experiences, 'formations' => $formations]);
+        $complementary_formations = $cv->formations()->where('type', 'complementaria')->get()->all();
+
+        if(!$complementary_formations) {
+
+            $var = new \stdClass();
+            $var->id = 0;
+            $var->resume_id = $id;
+            $var->type = 'complementaria';
+            $var->title = '';
+            $var->institution = '';
+            $var->institution_city = '';
+            $var->year = 0;
+            $var->hours = 0;
+
+            $complementary_formations = [$var];
+        }
+
+        return Inertia::render('CVFormEdit', [
+            'cv' => $cv, 
+            'experiences' => $experiences, 
+            'formations' => $formations,
+            'complementary_formations' => $complementary_formations,
+        ]);
 
     }
 
@@ -232,6 +254,9 @@ class CvController extends Controller
         $formation->date_start = $request->date_start;
         $formation->date_finish = $request->date_finish;
         $formation->resume_id = $request->resume_id;
+        if($request->has('type')) $formation->type = $request->type;
+        if($request->has('hours')) $formation->hours = $request->hours;
+        if($request->has('year')) $formation->year = $request->year;
 
         $formation->save();
 
@@ -248,7 +273,10 @@ class CvController extends Controller
         $formation->date_start = $request->date_start;
         $formation->date_finish = $request->date_finish;
         $formation->resume_id = $request->resume_id;
-
+        if($request->has('type')) $formation->type = $request->type;
+        if($request->has('hours')) $formation->hours = $request->hours;
+        if($request->has('year')) $formation->year = $request->year;
+ 
         $formation->save();
 
         return $formation;

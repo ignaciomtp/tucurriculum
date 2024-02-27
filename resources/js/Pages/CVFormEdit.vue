@@ -15,6 +15,7 @@ let props = defineProps({
     cv: Object,
     experiences: Array,
     formations: Array,
+    complementary_formations: Array,
 });
 
 
@@ -36,6 +37,7 @@ const submit = () => {
 };
 
 const toggleSectionVisible = (section) => {
+    console.log(section);
     sectionsVisible[section] = !sectionsVisible[section];
 }
 
@@ -157,6 +159,15 @@ const deleteElement = (data) => {
                             @section-visibility="toggleSectionVisible"
                             @formation-element-added="addElement"
                             @formation-element-removed="deleteElement"
+                       ></CvSectionAccordion>
+
+                       <CvSectionAccordion
+                            title="complementary_formation"
+                            :items="props.complementary_formations"
+                            :visible="sectionsVisible.complementary_formation"
+                            @section-visibility="toggleSectionVisible"
+                            @complementary_formation-element-added="addElement"
+                            @complementary_formation-element-removed="deleteElement"
                        ></CvSectionAccordion>
                        
                    </div>
