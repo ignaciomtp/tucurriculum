@@ -135,7 +135,7 @@ const deleteExp = () => {
             <div class="flex">
                 <div class="flex-auto w-33">
                     <div class="flex">
-                        <div class="p-1 m-1 flex-auto w-1/2">
+                        <div class="p-1 m-1 flex-auto w-1/4">
                             <InputLabel for="date_start" value="Fecha Inicio" />
 
                             <TextInput
@@ -151,7 +151,7 @@ const deleteExp = () => {
                             <InputError class="mt-2" :message="form.errors.date_start" />
                         </div>
 
-                        <div class="p-1 m-1 flex-auto w-1/2">
+                        <div class="p-1 m-1 flex-auto w-1/4">
                             <InputLabel for="date_finish" value="Fecha Fin" />
 
                             <TextInput
@@ -166,10 +166,8 @@ const deleteExp = () => {
 
                             <InputError class="mt-2" :message="form.errors.date_finish" />
                         </div>                  
-                    </div>
 
-                    <div class="flex w-full ">
-                        <div class="flex-auto w-1/2 invisible" v-if="formation.id != 0">
+                        <div class="flex-auto w-1/4 invisible" v-if="formation.id != 0">
                             <InputLabel for="id" value="id" />
 
                             <TextInput
@@ -179,9 +177,10 @@ const deleteExp = () => {
                                 v-model="form.id"
                                 autofocus
                                 autocomplete="id"
+                                readonly
                             />
                         </div>
-                        <div class="flex-auto w-1/2 invisible">
+                        <div class="flex-auto w-1/4 invisible">
                             <InputLabel for="resume_id" value="id cv" />
 
                             <input 
@@ -201,13 +200,13 @@ const deleteExp = () => {
                 <div class="flex-auto w-66 ">
 
 
-                    <div>
-                        <div class="flex items-center justify-start pt-3 m-2 row-start-4">
+                    <div >
+                        <div class="flex items-center justify-start pt-3 m-2 row-start-4 ">
                             <PrimaryButton v-if="props.formation.id == 0" class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                 Añadir al Currículum
                             </PrimaryButton>
 
-                            <div v-if="props.formation.id > 0" class="flex">
+                            <div v-if="props.formation.id > 0" class="flex text-right ">
                                 <SecondaryButton  class="ms-4" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Actualizar
                                 </SecondaryButton>

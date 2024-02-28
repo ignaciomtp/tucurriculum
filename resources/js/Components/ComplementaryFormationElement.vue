@@ -135,9 +135,9 @@ const deleteExp = () => {
             </div>
 
             <div class="flex">
-                <div class="flex-auto w-33">
+                <div class="flex-auto w-33 ">
                     <div class="flex">
-                        <div class="p-1 m-1 flex-auto w-1/3">
+                        <div class="p-1 m-1 flex-auto w-1/5">
                             <InputLabel for="year" value="Año" />
 
                             <TextInput
@@ -152,7 +152,7 @@ const deleteExp = () => {
                             <InputError class="mt-2" :message="form.errors.year" />
                         </div>
 
-                        <div class="p-1 m-1 flex-auto w-1/3">
+                        <div class="p-1 m-1 flex-auto w-1/5">
                             <InputLabel for="hours" value="Horas" />
 
                             <TextInput
@@ -167,7 +167,7 @@ const deleteExp = () => {
                             <InputError class="mt-2" :message="form.errors.hours" />
                         </div>     
 
-                        <div class="p-1 m-1 flex-auto w-1/3 invisible">
+                        <div class="p-1 m-1 flex-auto w-1/5 invisible">
                             <InputLabel for="type" value="Tipo" />
 
                             <TextInput
@@ -180,10 +180,8 @@ const deleteExp = () => {
                             />
                             <InputError class="mt-2" :message="form.errors.type" />
                         </div>             
-                    </div>
 
-                    <div class="flex w-full ">
-                        <div class="flex-auto w-1/2 invisible" v-if="formation.id != 0">
+                        <div class="flex-auto w-1/5 invisible" v-if="formation.id != 0">
                             <InputLabel for="id" value="id" />
 
                             <TextInput
@@ -193,9 +191,10 @@ const deleteExp = () => {
                                 v-model="form.id"
                                 autofocus
                                 autocomplete="id"
+                                readonly
                             />
                         </div>
-                        <div class="flex-auto w-1/2 invisible">
+                        <div class="flex-auto w-1/5 invisible">
                             <InputLabel for="resume_id" value="id cv" />
 
                             <input 
