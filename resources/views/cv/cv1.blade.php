@@ -141,34 +141,53 @@ body {
     </div>
 
     <div class="section mt-3 mb-2">
-      Profesional Experience
+       Experiencia Profesional
     </div>
 
-    
+    <ul>
       @foreach($experiences as $exp)
-      <div class="sectioncontent">
-        <span class="font-weight-bold">{{ $exp->title }}</span> en {{ $exp->company_name }}, {{ $exp->company_city }}
-        <p>
-          {{ $exp->job_description }}
-        </p>
-      </div>
+      <li>
+        <div class="sectioncontent">
+          <span class="font-weight-bold">{{ $exp->title }}</span> en {{ $exp->company_name }}, {{ $exp->company_city }} ({{ $exp->date_start }} - {{ $exp->date_finish }})
+          <p>
+            {{ $exp->job_description }}
+          </p>
+        </div>
+      </li>
       @endforeach
+    </ul>
     
 
-
-
-    <div class="sectioncontent">
-      Assistant Manager, Burger World, Orlando, FL – January 2010 – present
-
-      <ul>
-        <li>Create a weekly schedule based on hourly sales and employee availability</li>
-        <li>Prepare burgers, fries, nuggets and onion rings using restaurant equipment</li>
-        <li>Implement and monitor safety guidelines to promote employee safety</li>
-        <li>Transform frustrated customers into satisfied guests by following company recommendations</li>
-
-      </ul>
-      
+    <div class="section mt-3 mb-2">
+      Formación Académica
     </div>
+
+    <ul>
+      @foreach($formations as $for)
+      <li>
+        <div class="sectioncontent">
+          <span class="font-weight-bold">{{ $for->title }}</span>, {{ $for->institution }}, {{ $for->institution_city }} ({{ $for->date_finish }})
+          
+        </div>
+      </li>
+      @endforeach
+    </ul>
+
+
+    <div class="section mt-3 mb-2">
+      Formación Complementaria
+    </div>
+
+    <ul>
+      @foreach($complementary_formations as $cfor)
+      <li>
+        <div class="sectioncontent">
+          <span class="font-weight-bold">{{ $cfor->title }}</span>, {{ $cfor->institution }}, {{ $cfor->institution_city }} ({{ $cfor->year }})
+          
+        </div>
+      </li>
+      @endforeach
+    </ul>
 
 
 

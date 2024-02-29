@@ -53,17 +53,40 @@ class CvController extends Controller
 
         return Redirect::route('dashboard');
 
-
-
 */
 
-/**/
+
+        setlocale(LC_TIME, 'es_ES.UTF-8','esp');
 
         $cv = Resume::find(1);
 
         $experiences = $cv->experiences()->get()->all();
 
-        $pdf = Pdf::loadView('cv.cv1', compact('user', 'experiences'));
+        foreach($experiences as $exp) {
+            //$formattedStart = date("F Y", strtotime($exp->date_start));
+
+            $formattedStart = strftime("%B %G", strtotime($exp->date_start));
+
+            //$formattedFinish = date("F Y", strtotime($exp->date_finish));
+
+            $formattedFinish = strftime("%B %G", strtotime($exp->date_finish));
+
+            $exp->date_start = $formattedStart;
+            $exp->date_finish = $formattedFinish;
+        }
+
+        $formations = $cv->formations()->where('type', 'académica')->get()->all();
+
+        foreach($formations as $for) {
+            $formattedFinish = strftime("%G", strtotime($for->date_finish));
+            $for->date_finish = $formattedFinish;
+        }
+
+        $complementary_formations = $cv->formations()->where('type', 'complementaria')->get()->all();
+
+        $skills = $cv->skills()->get()->all();
+
+        $pdf = Pdf::loadView('cv.cv1', compact('user', 'experiences', 'formations', 'complementary_formations', 'skills'));
 
         return $pdf->stream('cv1.pdf');   
 
