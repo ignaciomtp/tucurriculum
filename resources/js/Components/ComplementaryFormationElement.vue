@@ -12,7 +12,7 @@ const props = defineProps({
     formation: Object,
 });
 
-const emit = defineEmits(['formation-deleted']);
+const emit = defineEmits(['complementary_formation-deleted', 'bd-updated']);
 
 const form = useForm({
     id: props.formation.id || 0,
@@ -47,6 +47,8 @@ const submit = () => {
         props.formation.id = response.data.id;
         form.id = response.data.id;
 
+        emit('bd-updated');
+
     })
     .catch(function (error) {
         console.log(error);
@@ -63,7 +65,7 @@ const deleteExp = () => {
     .then( response => {
        console.log(response);
 
-       emit('formation-deleted', response.data);
+       emit('complementary_formation-deleted', response.data);
     })
     .catch( error => {
        console.log(error);

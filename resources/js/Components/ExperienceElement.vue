@@ -12,7 +12,7 @@ const props = defineProps({
     experience: Object,
 });
 
-const emit = defineEmits(['experience-deleted']);
+const emit = defineEmits(['experience-deleted', 'bd-updated']);
 
 const form = useForm({
 	id: props.experience.id || 0,
@@ -48,6 +48,8 @@ const submit = () => {
 
 		props.experience.id = response.data.id;
 		form.id = response.data.id;
+
+		emit('bd-updated');
 
 	})
 	.catch(function (error) {

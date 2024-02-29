@@ -33,6 +33,7 @@ const emit = defineEmits([
     'skills-element-removed',
     'languages-element-added',
     'languages-element-removed',
+    'db-updated'
 ]);
 
 const toggleVisibility = () => {
@@ -150,6 +151,10 @@ const showTitle = (str) => {
 	return res;
 }
 
+const dbUpdated = () => {
+    emit('db-updated');
+}
+
 onMounted(() => {
   sectionTitle.value = showTitle(props.title);
 })
@@ -200,6 +205,7 @@ onMounted(() => {
                         <ExperienceElement 
                             :experience="item"
                             @experience-deleted="deleteElement"
+                            @bd-updated="dbUpdated"
                         />
                     </div>
 
@@ -207,6 +213,7 @@ onMounted(() => {
                         <FormationElement 
                             :formation="item"
                             @formation-deleted="deleteElement"
+                            @bd-updated="dbUpdated"
                         />
                     </div>
 
@@ -214,6 +221,7 @@ onMounted(() => {
                         <ComplementaryFormationElement 
                             :formation="item"
                             @complementary_formation-deleted="deleteElement"
+                            @bd-updated="dbUpdated"
                         />
                     </div>
                    

@@ -12,7 +12,7 @@ const props = defineProps({
     formation: Object,
 });
 
-const emit = defineEmits(['formation-deleted']);
+const emit = defineEmits(['formation-deleted', 'bd-updated']);
 
 const form = useForm({
     id: props.formation.id || 0,
@@ -44,6 +44,8 @@ const submit = () => {
 
         props.formation.id = response.data.id;
         form.id = response.data.id;
+
+        emit('bd-updated');
 
     })
     .catch(function (error) {
