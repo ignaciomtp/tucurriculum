@@ -4,12 +4,18 @@ import ChevronUp from '@/Components/ChevronUp.vue';
 import ExperienceElement from '@/Components/ExperienceElement.vue';
 import FormationElement from '@/Components/FormationElement.vue';
 import ComplementaryFormationElement from '@/Components/ComplementaryFormationElement.vue';
+import SkillElement from '@/Components/SkillElement.vue';
+import SkillBadge from '@/Components/SkillBadge.vue';
 import { ref, onMounted } from "vue";
 
 let props = defineProps({
 	title: String,
     items: Array,
     visible: Boolean,
+    resume: {
+        type: Number,
+        required: false,
+    },
 });
 
 
@@ -48,26 +54,6 @@ const slugify = (str) => {
     .replace(/-+/g, '-'); // remove consecutive hyphens
 }
 
-/*
-const addExperience = () => {
-    const exp = {
-        id: 0,
-        title: '',
-        company_name: '',
-        company_city: '',
-        date_start: '',
-        date_finish: '',
-        job_description: '',
-    };
-
-    emit('experience-added', exp);
-
-}
-
-const deleteExperience = (id) => {
-    emit('experience-removed', id);
-}
-*/
 
 const addElement = () => {
     let elem;
@@ -136,6 +122,9 @@ const deleteElement = (id) => {
     emit(props.title + '-element-removed', {id, section: props.title});
 }
 
+const addSkill = (skill) => {
+    emit('skills-element-added', {elem: skill, section: 'skills'});
+}
 
 const showTitle = (str) => {
 	let res = '';
@@ -165,6 +154,7 @@ onMounted(() => {
   sectionTitle.value = showTitle(props.title);
 })
 
+
 </script>
 
 <template>
@@ -184,35 +174,57 @@ onMounted(() => {
         </div>                          
 
        <div v-if="visible">
-           <div class="my-3 py-2 bg-gray-200" v-for="(item, index) in items" :key="index + 1">
+            <div class="p-1" v-if="title == 'skills'">
+                
+                <div class="m-1">
+                    <SkillElement 
+                        :resume_id="resume"
+                        @skill-added="addSkill"
+                    />                   
+                </div> 
 
-                <div v-if="title == 'experience'">
-                    <ExperienceElement 
-                        :experience="item"
-                        @experience-deleted="deleteElement"
+                <span v-for="(item, index) in items" :key="index + 1">
+                    <SkillBadge 
+                        :skill="item"
+                        @skill-deleted="deleteElement"
                     />
-                </div>
+                </span>
 
-                <div v-if="title == 'formation'">
-                    <FormationElement 
-                        :formation="item"
-                        @formation-deleted="deleteElement"
-                    />
-                </div>
+                
+            </div>
 
-                <div v-if="title == 'complementary_formation'">
-                    <ComplementaryFormationElement 
-                        :formation="item"
-                        @complementary_formation-deleted="deleteElement"
-                    />
-                </div>
+            <div v-if="title != 'skills'">
+               <div class="my-3 py-2 bg-gray-200" v-for="(item, index) in items" :key="index + 1">
 
-               
-           </div>
+                    <div v-if="title == 'experience'">
+                        <ExperienceElement 
+                            :experience="item"
+                            @experience-deleted="deleteElement"
+                        />
+                    </div>
 
-           <div class="text-right mb-4">
-               <button type="button" @click="addElement()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
-           </div>
+                    <div v-if="title == 'formation'">
+                        <FormationElement 
+                            :formation="item"
+                            @formation-deleted="deleteElement"
+                        />
+                    </div>
+
+                    <div v-if="title == 'complementary_formation'">
+                        <ComplementaryFormationElement 
+                            :formation="item"
+                            @complementary_formation-deleted="deleteElement"
+                        />
+                    </div>
+                   
+               </div>
+
+               <div class="text-right mb-4">
+                   <button type="button" @click="addElement()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Añadir</button>
+               </div>                
+            </div>
+
+
        </div>
 
        

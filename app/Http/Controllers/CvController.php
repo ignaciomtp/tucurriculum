@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use App\Models\Resume;
 use App\Models\Experience;
 use App\Models\Formation;
+use App\Models\Skill;
 
 class CvController extends Controller
 {
@@ -157,11 +158,24 @@ class CvController extends Controller
             $complementary_formations = [$var];
         }
 
+        $skills = $cv->skills()->get()->all();
+
+        if(!$skills) {
+            $var = new \stdClass();
+            $var->id = 0;
+            $var->resume_id = $id;
+            $var->name = '';
+            $var->level = 0;
+
+            $skills = [$var];
+        }
+
         return Inertia::render('CVFormEdit', [
             'cv' => $cv, 
             'experiences' => $experiences, 
             'formations' => $formations,
             'complementary_formations' => $complementary_formations,
+            'skills' => $skills,
         ]);
 
     }
@@ -284,6 +298,38 @@ class CvController extends Controller
 
     public function deleteFormation($id) {
         Formation::destroy($id);
+
+        return $id;
+    }
+
+    public function addSkill(Request $request) {
+        $skill = new Skill;
+
+        $skill->name = $request->name;
+        $skill->level = $request->level;
+        $skill->resume_id = $request->resume_id;
+
+        $skill->save();
+
+        return $skill;
+    }
+
+    public function updateSkill(Request $request) {
+        
+        $skill = Skill::findOrFail($request->id);
+
+        $skill->name = $request->name;
+        $skill->level = $request->level;
+        $skill->resume_id = $request->resume_id;
+
+        $skill->save();
+
+        return $skill;
+
+    }
+
+    public function deleteSkill($id) {
+        Skill::destroy($id);
 
         return $id;
     }

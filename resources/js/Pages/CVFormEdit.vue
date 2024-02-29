@@ -16,6 +16,7 @@ let props = defineProps({
     experiences: Array,
     formations: Array,
     complementary_formations: Array,
+    skills: Array,
 });
 
 
@@ -54,17 +55,22 @@ const deleteExperience = (id) => {
 }
 
 const addElement = (data) => {
-    console.log('Elem: ', data.elem);
-    console.log('Section: ', data.section);
+    
     data.elem['resume_id'] = props.cv.id;
 
-    props[data.section + 's'].push(data.elem);
+    let section = data.section;
+    if(section != 'skills' && section != 'languages') section += 's';
+
+    props[section].push(data.elem);
 }
 
 const deleteElement = (data) => {
-    let idx = props[data.section + 's'].findIndex(elem => elem.id == data.id);
+    let section = data.section;
+    if(section != 'skills' && section != 'languages') section += 's';
 
-    if(idx > -1) props[data.section + 's'].splice(idx, 1);
+    const idx = props[section].findIndex(elem => elem.id == data.id);
+
+    if(idx > -1) props[section].splice(idx, 1);
 }
 
 </script>
@@ -168,6 +174,16 @@ const deleteElement = (data) => {
                             @section-visibility="toggleSectionVisible"
                             @complementary_formation-element-added="addElement"
                             @complementary_formation-element-removed="deleteElement"
+                       ></CvSectionAccordion>
+
+                       <CvSectionAccordion
+                            title="skills"
+                            :items="props.skills"
+                            :visible="sectionsVisible.skills"
+                            :resume="props.cv.id"
+                            @section-visibility="toggleSectionVisible"
+                            @skills-element-added="addElement"
+                            @skills-element-removed="deleteElement"
                        ></CvSectionAccordion>
                        
                    </div>
