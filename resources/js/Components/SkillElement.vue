@@ -20,7 +20,7 @@ const skill = reactive({
     level: 0,
 });
 
-const emit = defineEmits(['skill-added']);
+const emit = defineEmits(['skill-added', 'bd-updated']);
 
 const form = useForm({
     resume_id: props.resume_id || 0,
@@ -43,7 +43,7 @@ const submit = () => {
     .then(function (response) {
 
         emit('skill-added', response.data);
-
+        emit('bd-updated');
         form.name = '';
         form.level = 0;
 

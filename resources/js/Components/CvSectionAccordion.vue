@@ -185,6 +185,7 @@ onMounted(() => {
                     <SkillElement 
                         :resume_id="resume"
                         @skill-added="addSkill"
+                        @bd-updated="dbUpdated"
                     />                   
                 </div> 
 
@@ -192,6 +193,7 @@ onMounted(() => {
                     <SkillBadge 
                         :skill="item"
                         @skill-deleted="deleteElement"
+                        @bd-updated="dbUpdated"
                     />
                 </span>
 

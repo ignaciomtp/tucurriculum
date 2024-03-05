@@ -102,6 +102,14 @@ body {
   border: 1px solid blue;
 }
 
+.black {
+  color: black;
+}
+
+.fill-class > svg { 
+    fill: orange;
+}
+
 </style>
 
 
@@ -190,6 +198,31 @@ body {
     </ul>
 
 
+    <div class="section mt-3 mb-3">
+      Habilidades
+    </div>
+
+    <div class="col-container ">
+      @foreach($skills as $skill)
+      <div class="block-30 ib pt-2 pb-2">
+        <div class="block-50 ib">
+          <strong>{{ $skill->name }}</strong> 
+        </div>
+        
+        <div class="block-40 ib fill-class">
+          @for($i = 0; $i < $skill->level; $i++)
+           <img src="{{ public_path('storage/icons/star-fill.svg') }}" height="12">
+          @endfor
+
+          @if($skill->level < 5)
+            @for($j = 0; $j < 5 - $skill->level; $j++)
+             <img src="{{ public_path('storage/icons/star.svg') }}" height="12">
+            @endfor
+          @endif
+        </div>
+      </div>
+      @endforeach
+    </div>
 
 
   </body>

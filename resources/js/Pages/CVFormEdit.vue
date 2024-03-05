@@ -73,7 +73,7 @@ const addElement = (data) => {
 }
 
 const deleteElement = (data) => {
-    console.log('**************************', data);
+
     let section = data.section;
     if(section != 'skills' && section != 'languages') section += 's';
 
@@ -202,7 +202,7 @@ const cvChanged = () => {
                                 @section-visibility="toggleSectionVisible"
                                 @skills-element-added="addElement"
                                 @skills-element-removed="deleteElement"
-                               
+                                @db-updated="cvChanged"
                            ></CvSectionAccordion>
                            
                        </div>
