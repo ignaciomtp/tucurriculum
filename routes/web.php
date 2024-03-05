@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/updatepersonaldata', [CvController::class, 'updatePersonalData'])->name('personal.data');
     Route::get('/viewcv', [CvController::class, 'createPdfCv'])->name('view.cv');
+    Route::get('/viewcv2', [CvController::class, 'view2'])->name('view2.cv');
     Route::get('/mis-cvs', [CvController::class, 'viewCvs'])->name('miscvs');
     Route::get('/new-cv', [CvController::class, 'createNewCv'])->name('createnewcv');
     Route::post('/savenewcv', [CvController::class, 'saveNewCv'])->name('savenewcv');

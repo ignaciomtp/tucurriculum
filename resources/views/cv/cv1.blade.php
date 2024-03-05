@@ -106,8 +106,9 @@ body {
   color: black;
 }
 
-.fill-class > svg { 
-    fill: orange;
+.address span {
+  width: 20px;
+  display: inline-block;
 }
 
 </style>
@@ -120,10 +121,10 @@ body {
 
       <div class="block-30 f-right ">
         <div class="address ">
-          {{ $user->address }}, <br>
-          {{ $user->zip }} {{ $user->city }} <br>
-          {{ $user->email }} <br>
-          {{ $user->phone }}
+          <span>@include('cv.icons.geo-alt-fill', ['color' => '#AA9739', 'size' => 8])</span>{{ $user->address }}, <br>
+          <span></span>{{ $user->zip }} {{ $user->city }} <br>
+          <span>@include('cv.icons.envelope', ['color' => '#AA9739', 'size' => 8])</span> {{ $user->email }} <br>
+          <span>@include('cv.icons.telephone', ['color' => '#AA9739', 'size' => 4])</span>{{ $user->phone }}
         </div>
       </div>
 
@@ -209,14 +210,14 @@ body {
           <strong>{{ $skill->name }}</strong> 
         </div>
         
-        <div class="block-40 ib fill-class">
+        <div class="block-40 ib black-green">
           @for($i = 0; $i < $skill->level; $i++)
-           <img src="{{ public_path('storage/icons/star-fill.svg') }}" height="12">
+           @include('cv.icons.star-fill', ['color' => '#AA9739'])
           @endfor
 
           @if($skill->level < 5)
             @for($j = 0; $j < 5 - $skill->level; $j++)
-             <img src="{{ public_path('storage/icons/star.svg') }}" height="12">
+              @include('cv.icons.star', ['color' => '#AA9739'])
             @endfor
           @endif
         </div>
