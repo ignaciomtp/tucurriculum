@@ -28,9 +28,16 @@ body {
 }
 
 .address {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #AA9739;
+  line-height: 1.2rem;
+}
+
+.address span {
+  width: 20px;
+  display: inline-block;
   
+  height: 0.8rem;
 }
 
 .section {
@@ -106,10 +113,7 @@ body {
   color: black;
 }
 
-.address span {
-  width: 20px;
-  display: inline-block;
-}
+
 
 </style>
 
@@ -121,10 +125,10 @@ body {
 
       <div class="block-30 f-right ">
         <div class="address ">
-          <span>@include('cv.icons.geo-alt-fill', ['color' => '#AA9739', 'size' => 8])</span>{{ $user->address }}, <br>
-          <span></span>{{ $user->zip }} {{ $user->city }} <br>
-          <span>@include('cv.icons.envelope', ['color' => '#AA9739', 'size' => 8])</span> {{ $user->email }} <br>
-          <span>@include('cv.icons.telephone', ['color' => '#AA9739', 'size' => 4])</span>{{ $user->phone }}
+          <span>@include('cv.icons.geo-alt', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->address }}, <br>
+          <span></span> {{ $user->zip }} {{ $user->city }} <br>
+          <span>@include('cv.icons.envelope', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->email }} <br>
+          <span>@include('cv.icons.telephone', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->phone }}
         </div>
       </div>
 
