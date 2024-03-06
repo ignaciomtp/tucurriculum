@@ -125,10 +125,10 @@ body {
 
       <div class="block-30 f-right ">
         <div class="address ">
-          <span>@include('cv.icons.geo-alt', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->address }}, <br>
+          <span>@include('cv.icons.geo-alt-fill', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->address }}, <br>
           <span></span> {{ $user->zip }} {{ $user->city }} <br>
-          <span>@include('cv.icons.envelope', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->email }} <br>
-          <span>@include('cv.icons.telephone', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->phone }}
+          <span>@include('cv.icons.envelope-fill', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->email }} <br>
+          <span>@include('cv.icons.telephone-fill', ['color' => '#AA9739', 'size' => 10])</span> {{ $user->phone }}
         </div>
       </div>
 

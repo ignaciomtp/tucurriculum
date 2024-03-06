@@ -45,20 +45,13 @@ class CvController extends Controller
     }
 
 
-    public function createPdfCv() {
+    public function createPdfCv($id) {
 
         $user = auth()->user();
-/*
-        GeneratePdf::dispatch($user);
-
-        return Redirect::route('dashboard');
-
-*/
-
 
         setlocale(LC_TIME, 'es_ES.UTF-8','esp');
 
-        $cv = Resume::find(1);
+        $cv = Resume::find($id);
 
         $experiences = $cv->experiences()->get()->all();
 

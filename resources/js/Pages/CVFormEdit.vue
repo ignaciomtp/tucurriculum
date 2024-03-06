@@ -106,7 +106,7 @@ const cvChanged = () => {
 
                        <div class="p-4 ">
                             <div class="text-right" style="width: 25%;float: right;">
-                                <a :href="route('view.cv')" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Ver Currículum</a>
+                                <a :href="route('view.cv', [props.cv.id])" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Ver Currículum</a>
                             </div>
                            <h1 class="text-2xl">Actualizar Currículum</h1>
 
@@ -218,6 +218,7 @@ const cvChanged = () => {
             <div class="flex-auto w-1/3 p-1 mx-1 borde">
                 <div class="bg-black mx-auto p-2">
                     <CvVisualizer 
+                        :cv_id="props.cv.id"
                         :updated="cvUpdated"
                         @view-updated="resetCvUpdated"
                     />
